@@ -15,6 +15,7 @@
 - [待决问题](docs/OPEN_QUESTIONS.md)：尚未确认、会影响设计的事项。
 - [关键决策](docs/decisions/)：已确认的设计选择。
 - [开源参考](docs/research/open-source-reference.md)：复用原则与候选项目。
+- [CNDT Agent 页面参考](docs/research/kimi-fde-agents-reference.md)：现有中台的 AI 员工配置与项目映射。
 - [原始资料](assets/source-materials/)：用户提供的架构图与 SOP 截图。
 
 ## 工作约定
