@@ -16,6 +16,7 @@
 - [关键决策](docs/decisions/)：已确认的设计选择。
 - [开源参考](docs/research/open-source-reference.md)：复用原则与候选项目。
 - [CNDT Agent 页面参考](docs/research/kimi-fde-agents-reference.md)：现有中台的 AI 员工配置与项目映射。
+- [海外获客矩阵参考](docs/research/overseas-acquisition-matrix-reference.md)：参考材料的可用能力、合规红线及与 MVP 的衔接方式。
 - [原始资料](assets/source-materials/)：用户提供的架构图与 SOP 截图。
 
 ## 工作约定

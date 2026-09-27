@@ -64,4 +64,5 @@
 - `assets/source-materials/商务部FDE技术说明文档.pdf`：知识库、风控、审计、测试和二期预留的技术要求。
 - `assets/source-materials/商务部FDE管理层简报文档.pdf`：管理层摘要和首轮全量测试用例。
 - `assets/source-materials/DeFi生态说明图.jpg`：业务背景参考，不属于本项目一期范围。
+- `assets/source-materials/OK科技矩阵功能介绍.pdf`：海外内容获客系统的市场参考；仅用于筛选合规的内容运营、线索承接与分析能力，非一期需求或实施依据。
 - 原先的低清截图仅作为历史留档；项目设计以以上正式 Word/PDF 材料为准。
