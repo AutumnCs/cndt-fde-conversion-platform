@@ -29,12 +29,21 @@ enum IdentityProvider {
   TELEGRAM
 }
 
+enum TransferStatus {
+  PENDING_ACCEPTANCE
+  ACCEPTED
+  CANCELLED
+}
+
 model InternalUser {
   id          String           @id @default(cuid())
   email       String           @unique
   displayName String
   role        UserRole
   assignments LeadAssignment[] @relation("AssignedSpecialist")
+  managedTransfers TransferTicket[] @relation("TransferManager")
+  receivedTransfers TransferTicket[] @relation("TransferSpecialist")
+  followUps FollowUpRecord[] @relation("FollowUpAuthor")
   reviews     Lead[]           @relation("ReviewedBy")
   auditEvents AuditEvent[]     @relation("AuditActor")
   createdAt   DateTime         @default(now())
@@ -106,6 +115,8 @@ model Lead {
   reviewedById   String?
   reviewedBy     InternalUser?    @relation("ReviewedBy", fields: [reviewedById], references: [id], onDelete: Restrict)
   assignment     LeadAssignment?
+  transferTicket TransferTicket?
+  followUps      FollowUpRecord[]
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
 }
@@ -117,6 +128,36 @@ model LeadAssignment {
   specialistId String
   specialist   InternalUser @relation("AssignedSpecialist", fields: [specialistId], references: [id], onDelete: Restrict)
   assignedAt   DateTime     @default(now())
+}
+
+model TransferTicket {
+  id           String         @id @default(cuid())
+  leadId       String         @unique
+  lead         Lead           @relation(fields: [leadId], references: [id], onDelete: Restrict)
+  managerId    String
+  manager      InternalUser   @relation("TransferManager", fields: [managerId], references: [id], onDelete: Restrict)
+  specialistId String
+  specialist   InternalUser   @relation("TransferSpecialist", fields: [specialistId], references: [id], onDelete: Restrict)
+  status       TransferStatus @default(PENDING_ACCEPTANCE)
+  acceptedAt   DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([specialistId, status])
+  @@index([managerId, createdAt])
+}
+
+model FollowUpRecord {
+  id               String       @id @default(cuid())
+  leadId           String
+  lead             Lead         @relation(fields: [leadId], references: [id], onDelete: Restrict)
+  authorId         String
+  author           InternalUser @relation("FollowUpAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  customerFeedback String
+  nextAction       String
+  createdAt        DateTime     @default(now())
+
+  @@index([leadId, createdAt])
 }
 
 model AuditEvent {
