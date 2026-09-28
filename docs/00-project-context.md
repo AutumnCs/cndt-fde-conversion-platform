@@ -65,4 +65,6 @@
 - `assets/source-materials/商务部FDE管理层简报文档.pdf`：管理层摘要和首轮全量测试用例。
 - `assets/source-materials/DeFi生态说明图.jpg`：业务背景参考，不属于本项目一期范围。
 - `assets/source-materials/OK科技矩阵功能介绍.pdf`：海外内容获客系统的市场参考；仅用于筛选合规的内容运营、线索承接与分析能力，非一期需求或实施依据。
+- `assets/source-materials/CNDT_Web3硬件钱包生态方案.pptx`：产品背景与候选知识材料；硬件、经销商履约、链上和金融系统不属于本项目开发范围。
+- `assets/source-materials/补充流程截图-1.jpg` 至 `补充流程截图-5.jpg`：已归档的补充流程材料；与正式 Word/PDF 存在差异时，以正式材料和业务确认优先。
 - 原先的低清截图仅作为历史留档；项目设计以以上正式 Word/PDF 材料为准。

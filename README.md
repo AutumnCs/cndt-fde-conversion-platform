@@ -12,6 +12,7 @@
 - [MVP 边界](docs/01-mvp-boundary.md)：一期包含与排除的功能。
 - [进度治理](docs/02-progress-governance.md)：里程碑、验收和变更控制。
 - [正式材料对齐说明](docs/03-source-documents-alignment.md)：原始 FDE 方案、项目裁剪与待确认差异。
+- [材料台账与需求追溯](docs/04-materials-traceability.md)：所有已提供材料的提取结果、采用方式和暂存事项。
 - [待决问题](docs/OPEN_QUESTIONS.md)：尚未确认、会影响设计的事项。
 - [关键决策](docs/decisions/)：已确认的设计选择。
 - [开源参考](docs/research/open-source-reference.md)：复用原则与候选项目。
