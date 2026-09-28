@@ -1,0 +1,135 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../apps/api/src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  COMPLIANCE
+  MANAGER
+  SPECIALIST
+  ADVISOR
+  ADMIN
+}
+
+enum LeadLevel {
+  A
+  B
+  C
+  RISK
+  INVALID
+}
+
+enum IdentityProvider {
+  TELEGRAM
+}
+
+model InternalUser {
+  id          String           @id @default(cuid())
+  email       String           @unique
+  displayName String
+  role        UserRole
+  assignments LeadAssignment[] @relation("AssignedSpecialist")
+  reviews     Lead[]           @relation("ReviewedBy")
+  auditEvents AuditEvent[]     @relation("AuditActor")
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Customer {
+  id         String             @id @default(cuid())
+  identities ExternalIdentity[]
+  conversations Conversation[]
+  leads      Lead[]
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+}
+
+model ExternalIdentity {
+  id             String           @id @default(cuid())
+  provider       IdentityProvider
+  providerUserId String
+  customerId     String
+  customer       Customer         @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  createdAt      DateTime         @default(now())
+
+  @@unique([provider, providerUserId])
+}
+
+model Conversation {
+  id             String    @id @default(cuid())
+  channel        String
+  externalChatId String
+  customerId     String
+  customer       Customer  @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  messages       Message[]
+  lead           Lead?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([channel, externalChatId])
+}
+
+model Message {
+  id                   String       @id @default(cuid())
+  conversationId       String
+  conversation         Conversation @relation(fields: [conversationId], references: [id], onDelete: Restrict)
+  externalMessageId    String
+  direction            String
+  body                 String?
+  telegramUpdateId     BigInt?      @unique
+  receivedAt           DateTime
+  createdAt            DateTime     @default(now())
+
+  @@unique([conversationId, externalMessageId])
+}
+
+model ProcessedTelegramUpdate {
+  id               String   @id @default(cuid())
+  telegramUpdateId BigInt   @unique
+  processedAt      DateTime @default(now())
+}
+
+model Lead {
+  id             String           @id @default(cuid())
+  customerId     String
+  customer       Customer         @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  conversationId String           @unique
+  conversation   Conversation     @relation(fields: [conversationId], references: [id], onDelete: Restrict)
+  level          LeadLevel        @default(C)
+  reviewReason   String?
+  reviewedById   String?
+  reviewedBy     InternalUser?    @relation("ReviewedBy", fields: [reviewedById], references: [id], onDelete: Restrict)
+  assignment     LeadAssignment?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model LeadAssignment {
+  id           String       @id @default(cuid())
+  leadId       String       @unique
+  lead         Lead         @relation(fields: [leadId], references: [id], onDelete: Restrict)
+  specialistId String
+  specialist   InternalUser @relation("AssignedSpecialist", fields: [specialistId], references: [id], onDelete: Restrict)
+  assignedAt   DateTime     @default(now())
+}
+
+model AuditEvent {
+  id         String        @id
+  actorId    String
+  actor      InternalUser  @relation("AuditActor", fields: [actorId], references: [id], onDelete: Restrict)
+  action     String
+  targetType String
+  targetId   String
+  before     Json?
+  after      Json?
+  occurredAt DateTime
+
+  @@index([targetType, targetId])
+  @@index([actorId, occurredAt])
+}

@@ -5,3 +5,4 @@ node_modules/
 coverage/
 .next/
 dist/
+apps/api/src/generated/prisma/
