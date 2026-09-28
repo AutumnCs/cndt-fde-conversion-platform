@@ -17,6 +17,7 @@
 - [开源参考](docs/research/open-source-reference.md)：复用原则与候选项目。
 - [CNDT Agent 页面参考](docs/research/kimi-fde-agents-reference.md)：现有中台的 AI 员工配置与项目映射。
 - [海外获客矩阵参考](docs/research/overseas-acquisition-matrix-reference.md)：参考材料的可用能力、合规红线及与 MVP 的衔接方式。
+- [MVP 技术设计（暂定）](docs/superpowers/specs/2026-09-28-cndt-fde-mvp-design.md)：总体架构、宣发矩阵、模块边界和技术安排。
 - [原始资料](assets/source-materials/)：用户提供的架构图与 SOP 截图。
 
 ## 工作约定
