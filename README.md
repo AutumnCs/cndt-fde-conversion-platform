@@ -19,6 +19,8 @@
 - [CNDT Agent 页面参考](docs/research/kimi-fde-agents-reference.md)：现有中台的 AI 员工配置与项目映射。
 - [海外获客矩阵参考](docs/research/overseas-acquisition-matrix-reference.md)：参考材料的可用能力、合规红线及与 MVP 的衔接方式。
 - [MVP 技术设计（暂定）](docs/superpowers/specs/2026-09-28-cndt-fde-mvp-design.md)：总体架构、宣发矩阵、模块边界和技术安排。
+- [交付路线图](docs/superpowers/plans/2026-09-28-cndt-fde-delivery-roadmap.md)：各独立子系统的实施顺序与启动闸门。
+- [P1 Telegram 线索闭环计划](docs/superpowers/plans/2026-09-28-cndt-fde-foundation-telegram-leads.md)：首条可运行闭环的逐任务开发与验收计划。
 - [原始资料](assets/source-materials/)：用户提供的架构图与 SOP 截图。
 
 ## 工作约定
