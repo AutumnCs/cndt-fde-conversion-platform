@@ -5,3 +5,7 @@ export function confirmLead(leads, leadId, assignee) {
       : lead,
   );
 }
+
+export function findLead(leads, leadId) {
+  return leads.find((lead) => lead.id === leadId) ?? null;
+}
